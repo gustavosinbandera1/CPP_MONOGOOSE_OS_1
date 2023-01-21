@@ -7,13 +7,14 @@
 #include "mgos_system.h"
 #include "mgos_timers.h"
 #include "mgos_adc.h"
+#include "mgos_mqtt.h"
 
 
 static void my_timer_cb(void *arg) {
    bool val = mgos_gpio_toggle(2);
    //LOG(LL_INFO, ("uptime: %.2lf", mgos_uptime()));
    //std::cout << "*************** hello world "<< "Uptime " << mgos_uptime() << std::endl;
-   std::cout << "\033[1;32mbold red text\033[0m\n";
+   std::cout << "\033[1;32mbold green text\033[0m\n";
 
    int reading = mgos_adc_read(32);   
    std::cout << "**********************" << reading << std::endl;
@@ -22,7 +23,21 @@ static void my_timer_cb(void *arg) {
 
 static void my_timer_cb2(void *arg) {
    bool val = mgos_gpio_toggle(2);
-   //LOG(LL_INFO, ("uptime: %.2lf", mgos_uptime()));
+
+
+
+   char topic[100];
+  snprintf(topic, sizeof(topic), "/devices/%s/events", mgos_sys_config_get_device_id());
+  
+  bool res = mgos_mqtt_pubf(topic, 0, false /* retain */,
+                            "{total_ram: %lu, free_ram: %lu}",
+                            (unsigned long) mgos_get_heap_size(),
+                            (unsigned long) mgos_get_free_heap_size());
+  char buf[8];
+  LOG(LL_INFO,("published: %s", res ? "yes" : "no"));
+
+   
+   LOG(LL_INFO, ("topic: %s", topic));
    std::cout << "\033[1;31mbold red text\033[0m\n";
    (void) arg;
 }
