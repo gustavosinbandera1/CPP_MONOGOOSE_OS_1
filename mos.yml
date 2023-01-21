@@ -1,4 +1,4 @@
-author: mongoose-os
+author: Gustavo Grisales
 description: A Mongoose OS app skeleton
 version: 1.0
 
@@ -9,6 +9,8 @@ mongoose_os_version: ${mos.version}
 # Optional. List of tags for online search.
 tags:
   - c
+includes:
+  - include
 
 # List of files / directories with C sources. No slashes at the end of dir names.
 sources:
@@ -22,7 +24,41 @@ filesystem:
 # Below is a custom firmware configuration example.
 # Uncomment and modify according to your needs:
 
-# config_schema:
+config_schema:
+    - ["wifi.ap.enable", "b", false, {title: "Enable"}]
+    # - ["wifi.ap.ssid", "s", "Gustavo_??????", {title: "SSID"}]
+    # - ["wifi.ap.pass", "s", "Mongoose", {title: "Password", type: "password"}]
+
+    # - ["wifi.ap.hidden", "b", false, {title: "Hide SSID"}]
+    # - ["wifi.ap.channel", "i", 6, {title: "Channel"}]
+    # - ["wifi.ap.max_connections", "i", 10, {title: "Max connections"}]
+    # - ["wifi.ap.ip", "s", "192.168.4.1", {title: "IP address"}]
+    # - ["wifi.ap.netmask", "s", "255.255.255.0", {title: "Network Mask"}]
+    # - ["wifi.ap.gw", "s", "192.168.4.1", {title: "Default Gateway"}]
+    # - ["wifi.ap.dhcp_start", "s", "192.168.4.2", {title: "DHCP Start Address"}]
+    # - ["wifi.ap.dhcp_end", "s", "192.168.4.100", {title: "DHCP End Address"}]
+
+    #- ["wifi.sta", "o", {title: "WiFi STA Config"}]
+    - ["wifi.sta.enable", true]
+    - ["wifi.sta.ssid", "JENIFFER_BANOL"]
+    - ["wifi.sta.pass", "COPITOCHIPI78"]
+    - ["wifi.sta_connect_timeout", 30]
+
+    - ["device.id", "test-ABCD"]
+
+
+    # - ["mqtt.enable", true]
+    # - ["mqtt.recv_mbuf_limit", 20480]
+    
+
+    
+    #- ["device.id", "suvie-m-????????????"]
+
+    # - ["app.pin", "i", 5, {title: "GPIO pin a sensor is attached to"}]
+
+    
+
+    #- ["i2c.enable", true]
 #  - ["my_app", "o", {title: "My app custom settings"}]
 #  - ["my_app.bool_value", "b", false, {title: "Some boolean value"}]
 #  - ["my_app.string_value", "s", "", {title: "Some string value"}]
@@ -30,8 +66,7 @@ filesystem:
 
 # These settings get compiled into the C structure, and can be accessed
 # from the C code this way:
-#
-# printf("Hello from %s!\n", mgos_sys_config_get_device_id());
+#printf("Hello from %s!\n", mgos_sys_config_get_device_id());
 #
 # Settings are cool: can be modified remotely without full firmware upgrade!
 #
@@ -45,12 +80,33 @@ filesystem:
 # config_schema:
 #  - ["debug.level", 3]
 
+
 libs:
-  - origin: https://github.com/mongoose-os-libs/boards
-  - origin: https://github.com/mongoose-os-libs/ca-bundle
-  - origin: https://github.com/mongoose-os-libs/rpc-service-config
+  #- origin: https://github.com/mongoose-os-libs/boards
+  #- origin: https://github.com/mongoose-os-libs/ca-bundle
+  
+
+  
+  - origin: https://github.com/mongoose-os-libs/wifi
+  - origin: https://github.com/mongoose-os-libs/adc
+  #- origin: https://github.com/mongoose-os-libs/http-server
+  #- origin: https://github.com/mongoose-os-libs/i2c
+  
+
+  - origin: https://github.com/mongoose-os-libs/rpc-common
   - origin: https://github.com/mongoose-os-libs/rpc-service-fs
+  - origin: https://github.com/mongoose-os-libs/rpc-service-config
   - origin: https://github.com/mongoose-os-libs/rpc-uart
+  - origin: https://github.com/mongoose-os-libs/rpc-service-gpio
+  - origin: https://github.com/mongoose-os-libs/rpc-service-i2c
+  - origin: https://github.com/mongoose-os-libs/rpc-ws
+  - origin: https://github.com/mongoose-os-libs/rpc-service-ota
+  - origin: https://github.com/mongoose-os-libs/rpc-mqtt
+  - origin: https://github.com/mongoose-os-libs/rpc-loopback
+  #- origin: https://github.com/mongoose-os-libs/freertos
+
+  - origin: https://github.com/mongoose-os-libs/mqtt # <-- Add this!
+  - origin: https://github.com/mongoose-os-libs/aws
 
 # Used by the mos tool to catch mos binaries incompatible with this file format
 manifest_version: 2017-09-29
