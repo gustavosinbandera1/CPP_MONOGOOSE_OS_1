@@ -1,0 +1,19 @@
+author: Gustavo Grisales
+type: lib
+description:
+version: 1.0
+
+sources:
+  - src
+includes:
+  - include  
+config_schema:
+  - ["door_sensor", "o", { title: "Door Sensor configuration"}]
+  - ["door_sensor.pin", "i", 26, {title: "sensor gpio input"}]
+  #- ["door_sensor.name", "s", "text example"]
+  - ["door_sensor.name", "s", "********************************************Mongoose************", {title: "name text test"}]
+tags:
+  - c
+libs:
+
+manifest_version: 2017-09-29

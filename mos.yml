@@ -19,7 +19,6 @@ sources:
 # List of dirs. Files from these dirs will be copied to the device filesystem
 filesystem:
   - fs
-
 # Custom configuration entries, settable via "device configuration"
 # Below is a custom firmware configuration example.
 # Uncomment and modify according to your needs:
@@ -107,6 +106,10 @@ libs:
 
   - origin: https://github.com/mongoose-os-libs/mqtt # <-- Add this!
   - origin: https://github.com/mongoose-os-libs/aws
+
+  
+  
+ # - origin: ./libs/hardware
 
 # Used by the mos tool to catch mos binaries incompatible with this file format
 manifest_version: 2017-09-29
