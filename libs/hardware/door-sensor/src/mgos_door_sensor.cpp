@@ -35,6 +35,7 @@ DoorSensor::DoorSensor() {
     last_door_closed_ = door_closed_ = !mgos_gpio_read(mgos_sys_config_get_door_sensor_pin());
     door_closed_cnt_ = 0;
     checkDoorTimerId_ = mgos_set_timer(200, MGOS_TIMER_REPEAT, checkDoorTimer_cb, NULL);
+    x=1;
 }
 
 
@@ -46,6 +47,9 @@ static void my_timer_cb(void *arg) {
    int reading = mgos_adc_read(32);   
    std::cout << "**********************" << reading << std::endl;
    (void) arg;
+   DoorSensor::getInstance()->x++;
+    LOG(LL_INFO, ("X on static object %d", DoorSensor::getInstance()->x));
+
 }
 //---------------------------------------------------------------------------------------------------------------
 int mgos_door_sensor_init() {

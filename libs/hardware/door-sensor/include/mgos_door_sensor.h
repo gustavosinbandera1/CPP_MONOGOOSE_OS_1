@@ -19,6 +19,8 @@ class DoorSensor {
 
     void checkDoor();
 
+    int x = 0;
+
    private:
     DoorSensor();
     mgos_timer_id checkDoorTimerId_;

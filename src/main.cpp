@@ -35,11 +35,11 @@ static void my_timer_cb2(void *arg) {
 static void my_timer_cb3(void *arg) {
    char topic[100];
    static int var = 0;
-   static int var2 = 1;
+   int var2 = 1;
    snprintf(topic, sizeof(topic), "/devices/%s/test", mgos_sys_config_get_device_id());
   
   bool res = mgos_mqtt_pubf(topic, 0, false /* retain */,
-                            "{count: %d, count2: %d}", (int) var++, var2+=2);
+                            "{count: %d, count2: %d}", (int) var++, var2++);
 
 
   char buf[8];
@@ -63,7 +63,7 @@ static void mifunc(struct mg_connection *c, const char *topic, int topic_len,
 extern "C" enum mgos_app_init_result mgos_app_init(void)
 {
    mgos_gpio_set_mode(2, MGOS_GPIO_MODE_OUTPUT);
-    mgos_set_timer(3000, MGOS_TIMER_REPEAT, my_timer_cb2, NULL);
+   mgos_set_timer(3000, MGOS_TIMER_REPEAT, my_timer_cb2, NULL);
     mgos_set_timer(3000, MGOS_TIMER_REPEAT, my_timer_cb3, NULL);
 
     mgos_mqtt_sub("/devices/data", mifunc, NULL);

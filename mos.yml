@@ -39,9 +39,9 @@ config_schema:
 
     #- ["wifi.sta", "o", {title: "WiFi STA Config"}]
     - ["wifi.sta.enable", true]
-    - ["wifi.sta.ssid", "Redmi Note 10S"]
-    - ["wifi.sta.pass", "12345678"]
-    - ["wifi.sta_connect_timeout", 30]
+    # - ["wifi.sta.ssid", "Redmi Note 10S"]
+    # - ["wifi.sta.pass", "12345678"]
+    # - ["wifi.sta_connect_timeout", 30]
 
     - ["device.id", "test-ABCD"]
 
@@ -109,7 +109,7 @@ libs:
 
   
   
- # - origin: ./libs/hardware
+  - origin: ./libs/hardware
 
 # Used by the mos tool to catch mos binaries incompatible with this file format
 manifest_version: 2017-09-29
