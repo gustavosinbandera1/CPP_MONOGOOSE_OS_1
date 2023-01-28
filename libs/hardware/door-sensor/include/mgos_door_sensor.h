@@ -10,21 +10,21 @@ int mgos_door_sensor_init(void);
 #endif
 
 
-class DoorSensor {
-   public:
-    static DoorSensor *getInstance() {
-        static DoorSensor inst;
-        return &inst;
-    }
+// class DoorSensor {
+//    public:
+//     static DoorSensor *getInstance() {
+//         static DoorSensor inst;
+//         return &inst;
+//     }
 
-    void checkDoor();
+//     void checkDoor();
 
-    int x = 0;
+//     int x = 0;
 
-   private:
-    DoorSensor();
-    mgos_timer_id checkDoorTimerId_;
-    bool door_closed_;
-    bool last_door_closed_;
-    int8_t door_closed_cnt_;
-};
+//    private:
+//     DoorSensor();
+//     mgos_timer_id checkDoorTimerId_;
+//     bool door_closed_;
+//     bool last_door_closed_;
+//     int8_t door_closed_cnt_;
+// };

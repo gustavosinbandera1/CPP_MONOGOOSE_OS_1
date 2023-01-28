@@ -34,12 +34,19 @@ static void my_timer_cb2(void *arg) {
 
 static void my_timer_cb3(void *arg) {
    char topic[100];
-   static int var = 0;
+   static int var = 32;
    int var2 = 1;
+   float testFloat = 3.3456789;
+
+   char message[100];
+   snprintf(message, sizeof(message), "sensor: %d", 4);
+   
+   //mgos_mqtt_pub(topic,message, strlen(message), 0, false);
+
+
    snprintf(topic, sizeof(topic), "/devices/%s/test", mgos_sys_config_get_device_id());
-  
-  bool res = mgos_mqtt_pubf(topic, 0, false /* retain */,
-                            "{count: %d, count2: %d}", (int) var++, var2++);
+   bool res = mgos_mqtt_pubf(topic, 0, false /* retain */,
+                            "{count_ascii: %c, count2: %d, test_float : %f}", (int) var++, var2++, testFloat);
 
 
   char buf[8];
@@ -70,3 +77,5 @@ extern "C" enum mgos_app_init_result mgos_app_init(void)
     
     return MGOS_APP_INIT_SUCCESS;
 }
+
+// https://iotquindio.blogspot.com/
