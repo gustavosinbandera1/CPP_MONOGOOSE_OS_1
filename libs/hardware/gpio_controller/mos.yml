@@ -1,0 +1,17 @@
+author: Gustavo Grisales
+type: lib
+description:
+version: 1.0
+
+sources:
+  - src
+includes:
+  - include  
+
+config_schema:
+
+tags:
+  - c
+libs:
+
+manifest_version: 2017-09-29

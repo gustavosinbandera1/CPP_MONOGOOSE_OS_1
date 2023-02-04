@@ -1,6 +1,6 @@
 author: Gustavo Grisales
 type: lib
-description:
+description: template lib
 version: 1.0
 
 sources:
@@ -9,9 +9,13 @@ includes:
   - include  
 
 config_schema:
+  - ["template", "o", { title: "Template object"}]
+  - ["template.int_property", "i", 26, {title: "numeric property"}]
+  - ["template.string_property", "s",  "string example", {title: "string property"}]
 
 tags:
   - c
+  - c++
 libs:
 
 manifest_version: 2017-09-29
