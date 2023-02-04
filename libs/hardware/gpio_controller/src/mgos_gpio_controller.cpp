@@ -33,6 +33,15 @@ bool GPIOController::set_pull_resistor(int pin, enum mgos_gpio_pull_type pull)
 
 }
 
+bool GPIOController::set_gpio_isr(int pin, enum mgos_gpio_pull_type pull, 
+                                    enum mgos_gpio_int_mode mode, 
+                                    mgos_gpio_int_handler_f cb, 
+                                    void *arg)
+{
+    mgos_gpio_enable_int(32);
+    return mgos_gpio_set_button_handler(pin, pull, mode, 150, cb, arg);
+}
+
 GPIOController::GPIOController()
 {
 

@@ -73,6 +73,24 @@ static void mifunc(struct mg_connection *c, const char *topic, int topic_len,
   LOG(LL_INFO, ("Got message on topic %.*s", msg_len, msg));
 }
 
+
+static void my_isr_cb(int pin, void *arg) {
+    LOG(LL_INFO, ("**********************************************gpio isr called*************************%d", pin));
+    switch(pin)
+    {
+      case 32:
+           LOG(LL_INFO, ("****se presiono el pin 32"));
+      break;
+
+      case 33:
+         LOG(LL_INFO, ("****se presiono el pin 33"));
+      break;
+
+    }
+}
+
+
+
 extern "C" enum mgos_app_init_result mgos_app_init(void) {
   mgos_set_timer(3000, MGOS_TIMER_REPEAT, my_timer_cb2, NULL);
   mgos_set_timer(3000, MGOS_TIMER_REPEAT, my_timer_cb3, NULL);
@@ -81,8 +99,10 @@ extern "C" enum mgos_app_init_result mgos_app_init(void) {
   GPIO_CONTROLLER->config_gpio(2, MGOS_GPIO_MODE_OUTPUT);
 
   GPIO_CONTROLLER->config_gpio(32, MGOS_GPIO_MODE_INPUT);
-  GPIO_CONTROLLER->set_pull_resistor(32, MGOS_GPIO_PULL_DOWN);
+  GPIO_CONTROLLER->set_gpio_isr(32, MGOS_GPIO_PULL_UP, MGOS_GPIO_INT_EDGE_NEG, my_isr_cb, NULL);
 
+  GPIO_CONTROLLER->config_gpio(33, MGOS_GPIO_MODE_INPUT);
+  GPIO_CONTROLLER->set_gpio_isr(33, MGOS_GPIO_PULL_UP, MGOS_GPIO_INT_EDGE_NEG, my_isr_cb, NULL);
   return MGOS_APP_INIT_SUCCESS;
 }
 
