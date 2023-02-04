@@ -38,7 +38,7 @@ bool GPIOController::set_gpio_isr(int pin, enum mgos_gpio_pull_type pull,
                                     mgos_gpio_int_handler_f cb, 
                                     void *arg)
 {
-    mgos_gpio_enable_int(32);
+    mgos_gpio_enable_int(pin);
     return mgos_gpio_set_button_handler(pin, pull, mode, 150, cb, arg);
 }
 
