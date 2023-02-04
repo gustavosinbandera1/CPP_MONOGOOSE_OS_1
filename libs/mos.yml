@@ -7,6 +7,6 @@ includes:
 sources:
 
 libs:
-  #- origin: ./libs/hardware
+  - origin: ./libs/hardware
 
 manifest_version: 2017-09-29

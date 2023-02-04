@@ -8,6 +8,6 @@ sources:
 includes:
 
 libs:
- #- origin: ./libs/hardware/door-sensor
+ - origin: ./libs/hardware/gpio_controller
  - origin: ./libs/hardware/template
 manifest_version: 2017-09-29
