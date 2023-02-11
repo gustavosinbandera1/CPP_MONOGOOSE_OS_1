@@ -22,7 +22,8 @@ class GPIOController {
   void write_gpio(int pin, bool level);
   bool read_gpio(int pin);
   bool set_pull_resistor(int pin, enum mgos_gpio_pull_type pull);
-  bool set_gpio_isr(int pin, enum mgos_gpio_pull_type pull, enum mgos_gpio_int_mode mode, mgos_gpio_int_handler_f cb, void *arg);
+  //bool set_gpio_isr(int pin, enum mgos_gpio_pull_type pull, enum mgos_gpio_int_mode mode, mgos_gpio_int_handler_f cb, void *arg);
+  bool set_gpio_isr(int pin, enum mgos_gpio_pull_type pull, enum mgos_gpio_int_mode mode, void *arg);
 
  private:
   GPIOController();

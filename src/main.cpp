@@ -9,6 +9,39 @@
 
 #include "mgos_gpio_controller.h"
 #include "mgos_mqtt.h"
+#include "mgos_button_events.h"
+#include "mgos_net.h"
+
+static void btn_cb(int id, void* ev_data, void* user_data)
+{
+  int *pin = static_cast<int*>(ev_data);
+  //int *data = (int*)ev_data;
+  LOG(LL_INFO, ("pin: %d pressed", *pin));
+}
+
+
+// grupo de eventos
+static void my_net_ev_handler(int ev, void *evd, void *arg) {
+  if (ev == MGOS_NET_EV_IP_ACQUIRED) {
+    LOG(LL_INFO, ("Just got IP!"));
+    // Fetch something very useful from somewhere
+  } else if(ev == MGOS_NET_EV_CONNECTING)
+  {
+
+  }
+
+  (void) evd;
+  (void) arg;
+}
+
+// evento en particular 
+static void connected_cb(int ev, void *evd, void *arg) {
+
+//log estoy connectado
+  (void) evd;
+  (void) arg;
+}
+
 
 static void my_timer_cb2(void *arg) {
   // bool val = mgos_gpio_toggle(2);
@@ -52,7 +85,6 @@ static void my_timer_cb3(void *arg) {
   char message[100];
   snprintf(message, sizeof(message), "sensor: %d", 4);
 
-  // mgos_mqtt_pub(topic,message, strlen(message), 0, false);
 
   snprintf(topic, sizeof(topic), "/devices/%s/test",
            mgos_sys_config_get_device_id());
@@ -73,36 +105,24 @@ static void mifunc(struct mg_connection *c, const char *topic, int topic_len,
   LOG(LL_INFO, ("Got message on topic %.*s", msg_len, msg));
 }
 
-
-static void my_isr_cb(int pin, void *arg) {
-    LOG(LL_INFO, ("**********************************************gpio isr called*************************%d", pin));
-    switch(pin)
-    {
-      case 32:
-           LOG(LL_INFO, ("****se presiono el pin 32"));
-      break;
-
-      case 33:
-         LOG(LL_INFO, ("****se presiono el pin 33"));
-      break;
-
-    }
-}
-
-
-
 extern "C" enum mgos_app_init_result mgos_app_init(void) {
+
+  mgos_event_add_handler(BUTTON_PRESSED, btn_cb, NULL );
+  //mgos_event_add_group_handler(EVENTS_BUTTON_BASE, btn_event_base_cb, NULL);
+
+  mgos_event_add_group_handler(MGOS_EVENT_GRP_NET, my_net_ev_handler, NULL);
+  //mgos_event_add_handler(MGOS_NET_EV_CONNECTED, connected_cb, NULL );
+
   mgos_set_timer(3000, MGOS_TIMER_REPEAT, my_timer_cb2, NULL);
   mgos_set_timer(3000, MGOS_TIMER_REPEAT, my_timer_cb3, NULL);
 
   mgos_mqtt_sub("/devices/data", mifunc, NULL);
   GPIO_CONTROLLER->config_gpio(2, MGOS_GPIO_MODE_OUTPUT);
 
-  GPIO_CONTROLLER->config_gpio(32, MGOS_GPIO_MODE_INPUT);
-  GPIO_CONTROLLER->set_gpio_isr(32, MGOS_GPIO_PULL_UP, MGOS_GPIO_INT_EDGE_NEG, my_isr_cb, NULL);
+  GPIO_CONTROLLER->config_gpio(mgos_sys_config_get_buttons_button1(), MGOS_GPIO_MODE_INPUT);
+  GPIO_CONTROLLER->set_gpio_isr(mgos_sys_config_get_buttons_button1(), MGOS_GPIO_PULL_UP, MGOS_GPIO_INT_EDGE_NEG, NULL);
 
-  GPIO_CONTROLLER->config_gpio(33, MGOS_GPIO_MODE_INPUT);
-  GPIO_CONTROLLER->set_gpio_isr(33, MGOS_GPIO_PULL_UP, MGOS_GPIO_INT_EDGE_NEG, my_isr_cb, NULL);
+  
   return MGOS_APP_INIT_SUCCESS;
 }
 

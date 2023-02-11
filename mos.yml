@@ -39,9 +39,9 @@ config_schema:
 
     #- ["wifi.sta", "o", {title: "WiFi STA Config"}]
     - ["wifi.sta.enable", true]
-    # - ["wifi.sta.ssid", "Redmi Note 10S"]
-    # - ["wifi.sta.pass", "12345678"]
-    # - ["wifi.sta_connect_timeout", 30]
+    - ["wifi.sta.ssid", "Redmi Note 10S"]
+    - ["wifi.sta.pass", "12345678"]
+    - ["wifi.sta_connect_timeout", 30]
 
     - ["device.id", "test-ABCD"]
 

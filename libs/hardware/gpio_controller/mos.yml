@@ -6,12 +6,17 @@ version: 1.0
 sources:
   - src
 includes:
-  - include  
+  - include
 
 config_schema:
   # - ["template", "o", { title: "Template object"}]
   # - ["template.int_property", "i", 26, {title: "numeric property"}]
   #- ["template.string_property", "s",  "string example", {title: "string property"}]
+
+  - ["buttons", "o", { title: "Button configuration" }]
+  - ["buttons.button1", "i", 33, { title: "power button" }]
+  - ["buttons.button2", "i", 34, { title: "speed up button" }]
+  - ["buttons.button3", "i", 35, { title: "speed down button" }]
 
 tags:
   - c
