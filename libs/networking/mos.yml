@@ -1,0 +1,12 @@
+author: Gustavo Grisales
+type: lib
+version: 1.2
+description: 
+
+sources:
+
+includes:
+
+libs:
+ - origin: ./libs/networking/mqtt-controller
+manifest_version: 2017-09-29

@@ -30,6 +30,6 @@ bool PlantillaCtrl::method3(int param)
 }
 //---------------------------------------------------------------------------------------------------------------
 int mgos_template_init() {
-  mgos_set_timer(1000, MGOS_TIMER_REPEAT, my_timer_cb, NULL);
+  mgos_set_timer(1000*60*5, MGOS_TIMER_REPEAT, my_timer_cb, NULL);
   return true;
 }

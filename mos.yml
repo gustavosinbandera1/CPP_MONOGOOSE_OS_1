@@ -110,6 +110,7 @@ libs:
   
   
   - origin: ./libs/hardware
+  - origin: ./libs/networking
 
 # Used by the mos tool to catch mos binaries incompatible with this file format
 manifest_version: 2017-09-29

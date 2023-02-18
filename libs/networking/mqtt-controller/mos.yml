@@ -1,0 +1,21 @@
+author: Gustavo Grisales
+type: lib
+description:
+version: 1.0
+
+sources:
+  - src
+includes:
+  - include  
+
+config_schema:
+  # - ["template1", "o", { title: "Template object"}]
+  # - ["template1.int_property", "i", 26, {title: "numeric property"}]
+  # - ["template.string_property", "s",  "string example", {title: "string property"}]
+
+tags:
+  - c
+  - c++
+libs:
+
+manifest_version: 2017-09-29
